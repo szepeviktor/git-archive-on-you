@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+
+name: "Workflow"
+
+on:
+    workflow_dispatch:
+        inputs:
+            repository:
+                type: "string"
+                description: "Repository: username/project"
+                required: true
+
+permissions: {}
+
+concurrency:
+    group: "${{ github.workflow }}-${{ github.ref }}"
+    cancel-in-progress: true
+
+jobs:
+    job_count:
+        name: "Job count"
+        runs-on: "ubuntu-22.04"
+        timeout-minutes: 1
+        steps:
+        -
+            name: "Checkout repository"
+            uses: "actions/checkout@v4.1.1"
+            with:
+                repository: "${{ inputs.repository }}"
+        -
+            name: "List exported files"
+            run: |
+                {
+                    echo '```'
+                    git archive HEAD | tar --list --exclude="*/*"
+                    echo '```'
+                } >>"${GITHUB_STEP_SUMMARY}"
