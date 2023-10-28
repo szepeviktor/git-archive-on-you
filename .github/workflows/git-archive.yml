@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow
 
-name: "Workflow"
+name: "Git archive"
 
 on:
     workflow_dispatch:
@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
     job_count:
-        name: "Job count"
+        name: "Exported files - ${{ inputs.repository }}"
         runs-on: "ubuntu-22.04"
         timeout-minutes: 1
         steps:
