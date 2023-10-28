@@ -30,6 +30,7 @@ jobs:
         -
             name: "List exported files"
             run: |
+                git archive HEAD | tar --list
                 {
                     echo '```'
                     git archive HEAD | tar --list --exclude="*/*"
