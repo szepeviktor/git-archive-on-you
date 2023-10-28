@@ -1,4 +1,4 @@
-# List files of `git archive`
+# `git archive` on you!
 
 Run `git archive HEAD` on any GitHub repository.
 
